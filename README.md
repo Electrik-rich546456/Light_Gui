@@ -24,9 +24,7 @@ I dont know how to implement all my ideas.
 On line 85, I cannot to get slider to update in GUI.
 If I put a number instead of br_counter it works.
 If I put self.Br_Slide.setValue(br_counter) the slider stays put. 
-This help channel will time out as no one is saying anything please feel free to PM me if this channel idles out.
-
-I just needed another pair of eyes on it.Ive managed to make the gui and the other supporting code work as I wanted.
+Ive managed to make the gui and the other supporting code work as I wanted.
 
 It can turn off all lights. Change colour temp and brightness.
 I cannot get status to fill in the correct values for the slider.
