@@ -1,277 +1,213 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>LightControler</class>
- <widget class="QWidget" name="LightControler">
+ <class>Lights</class>
+ <widget class="QMainWindow" name="Lights">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>267</width>
-    <height>229</height>
+    <width>315</width>
+    <height>133</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>MainWindow</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <property name="topMargin">
-    <number>9</number>
-   </property>
-   <item row="0" column="0">
-    <widget class="QLabel" name="Lounge">
-     <property name="text">
-      <string>Lounge</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QLabel" name="Lounge_Br_lable">
-     <property name="text">
-      <string>Brightness</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QPushButton" name="Powe_button">
-     <property name="text">
-      <string>Power</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QSlider" name="Lounge_br_sl">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="maximum">
-      <number>100</number>
-     </property>
-     <property name="tracking">
-      <bool>true</bool>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="invertedControls">
-      <bool>false</bool>
-     </property>
-     <property name="tickPosition">
-      <enum>QSlider::TicksBothSides</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QLabel" name="Lounge_tmp_lable">
-     <property name="text">
-      <string>Colour Temp</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QSlider" name="Lounge_col_tmp_sl">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="maximum">
-      <number>100</number>
-     </property>
-     <property name="tracking">
-      <bool>true</bool>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="invertedControls">
-      <bool>false</bool>
-     </property>
-     <property name="tickPosition">
-      <enum>QSlider::TicksBothSides</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0" colspan="2">
-    <widget class="Line" name="line">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="Leo_room">
-     <property name="text">
-      <string>Leo's Room</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="QLabel" name="Leo_Br_lable">
-     <property name="text">
-      <string>Brightness</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="0">
-    <widget class="QPushButton" name="Power_button">
-     <property name="text">
-      <string>Power</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1">
-    <widget class="QSlider" name="Leos_br_sl">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="maximum">
-      <number>100</number>
-     </property>
-     <property name="tracking">
-      <bool>true</bool>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="invertedControls">
-      <bool>false</bool>
-     </property>
-     <property name="tickPosition">
-      <enum>QSlider::TicksBothSides</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="1">
-    <widget class="QLabel" name="Leo_col_tmp_lable">
-     <property name="text">
-      <string>Colour Temp</string>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="1">
-    <widget class="QSlider" name="Leos_col_tem_sl">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="maximum">
-      <number>100</number>
-     </property>
-     <property name="tracking">
-      <bool>true</bool>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="invertedControls">
-      <bool>false</bool>
-     </property>
-     <property name="tickPosition">
-      <enum>QSlider::TicksBothSides</enum>
-     </property>
-    </widget>
-   </item>
-  </layout>
+  <widget class="QWidget" name="hidden">
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>10</y>
+      <width>57</width>
+      <height>15</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Lounge</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="Br_Slide">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>30</y>
+      <width>170</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>100</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="hoz_line">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>140</y>
+      <width>591</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="Vert_line_2">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>-40</y>
+      <width>20</width>
+      <height>511</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QSlider" name="Col_Slide">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>90</y>
+      <width>170</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>10</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Brightness</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>60</y>
+      <width>141</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Color Temperature</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>80</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>On</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+    <property name="autoDefault">
+     <bool>false</bool>
+    </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <tabstops>
-  <tabstop>Lounge_br_sl</tabstop>
-  <tabstop>Lounge_col_tmp_sl</tabstop>
-  <tabstop>Power_button</tabstop>
-  <tabstop>Leos_br_sl</tabstop>
-  <tabstop>Leos_col_tem_sl</tabstop>
- </tabstops>
  <resources/>
  <connections>
   <connection>
-   <sender>Lounge_br_sl</sender>
+   <sender>statusbar</sender>
+   <signal>messageChanged(QString)</signal>
+   <receiver>statusbar</receiver>
+   <slot>showMessage(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>132</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>205</x>
+     <y>132</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Br_Slide</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>Lounge_br_sl</receiver>
+   <receiver>Br_Slide</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>259</x>
-     <y>35</y>
+     <x>178</x>
+     <y>55</y>
     </hint>
     <hint type="destinationlabel">
-     <x>100</x>
-     <y>34</y>
+     <x>178</x>
+     <y>55</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>Powe_button</sender>
-   <signal>pressed()</signal>
-   <receiver>Powe_button</receiver>
-   <slot>toggle()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>88</x>
-     <y>82</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>9</x>
-     <y>61</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>Power_button</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>Power_button</receiver>
-   <slot>toggle()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>88</x>
-     <y>167</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>12</x>
-     <y>169</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>Lounge_col_tmp_sl</sender>
-   <signal>sliderMoved(int)</signal>
-   <receiver>Lounge_col_tmp_sl</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>254</x>
-     <y>103</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>100</x>
-     <y>98</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>Leos_br_sl</sender>
+   <sender>Col_Slide</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>Leos_br_sl</receiver>
+   <receiver>Col_Slide</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>254</x>
-     <y>158</y>
+     <x>236</x>
+     <y>119</y>
     </hint>
     <hint type="destinationlabel">
-     <x>102</x>
-     <y>159</y>
+     <x>236</x>
+     <y>119</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>Leos_col_tem_sl</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>Leos_col_tem_sl</receiver>
-   <slot>setValue(int)</slot>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Lights</receiver>
+   <slot>update()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>254</x>
-     <y>218</y>
+     <x>49</x>
+     <y>51</y>
     </hint>
     <hint type="destinationlabel">
-     <x>95</x>
-     <y>207</y>
+     <x>157</x>
+     <y>66</y>
     </hint>
    </hints>
   </connection>

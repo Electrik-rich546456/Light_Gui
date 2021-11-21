@@ -1,134 +1,98 @@
 #!/usr/bin/python3.8
 
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'Lights_gui_5.ui'
-
-#
-# Created by: PyQt5 UI code generator 5.14.1
-#
-# WARNING! All changes made in this file will be lost!
-
-
 from PyQt5 import QtCore, QtWidgets
+from functools import partial
+#from PyQt5.QtCore import Qt
 
+class Ui_Lights(object):
+    def setupUi(self, Lights):
+        Lights.setObjectName("Lights")
+        Lights.setEnabled(True)
+        Lights.resize(315, 133)
+        self.hidden = QtWidgets.QWidget(Lights)
+        self.hidden.setObjectName("hidden")
+        self.label = QtWidgets.QLabel(self.hidden)
+        self.label.setGeometry(QtCore.QRect(30, 10, 57, 15))
+        self.label.setObjectName("label")
+        self.Br_Slide = QtWidgets.QSlider(self.hidden)
+        self.Br_Slide.setGeometry(QtCore.QRect(120, 30, 170, 16))
+        self.Br_Slide.setMaximum(100)
+        self.Br_Slide.setOrientation(QtCore.Qt.Horizontal)
+        self.Br_Slide.setObjectName("Br_Slide")
+        self.hoz_line = QtWidgets.QFrame(self.hidden)
+        self.hoz_line.setGeometry(QtCore.QRect(0, 140, 591, 20))
+        self.hoz_line.setFrameShape(QtWidgets.QFrame.HLine)
+        self.hoz_line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.hoz_line.setObjectName("hoz_line")
+        self.Vert_line_2 = QtWidgets.QFrame(self.hidden)
+        self.Vert_line_2.setGeometry(QtCore.QRect(100, -40, 20, 511))
+        self.Vert_line_2.setFrameShape(QtWidgets.QFrame.VLine)
+        self.Vert_line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.Vert_line_2.setObjectName("Vert_line_2")
+        self.Col_Slide = QtWidgets.QSlider(self.hidden)
+        self.Col_Slide.setGeometry(QtCore.QRect(120, 90, 170, 16))
+        self.Col_Slide.setMaximum(100)
+        self.Col_Slide.setOrientation(QtCore.Qt.Horizontal)
+        self.Col_Slide.setObjectName("Col_Slide")
+        self.label_2 = QtWidgets.QLabel(self.hidden)
+        self.label_2.setGeometry(QtCore.QRect(170, 10, 71, 16))
+        self.label_2.setObjectName("label_2")
+        self.label_3 = QtWidgets.QLabel(self.hidden)
+        self.label_3.setGeometry(QtCore.QRect(150, 60, 141, 20))
+        self.label_3.setObjectName("label_3")
+        self.pushButton = QtWidgets.QPushButton(self.hidden)
+        self.pushButton.setEnabled(True)
+        self.pushButton.setGeometry(QtCore.QRect(10, 40, 80, 23))
+        self.pushButton.setCheckable(True)
+#     self.pushButton.setChecked(True)
+        self.pushButton.setChecked(False)
+        
+        self.pushButton.setAutoDefault(False)
+        self.pushButton.setDefault(False)
+        self.pushButton.setFlat(False)
+        self.pushButton.setObjectName("pushButton")
+        Lights.setCentralWidget(self.hidden)
+        self.statusbar = QtWidgets.QStatusBar(Lights)
+        self.statusbar.setObjectName("statusbar")
+        Lights.setStatusBar(self.statusbar)
 
-class Ui_LightControler(object):
-    def setupUi(self, LightControler):
-        LightControler.setObjectName("LightControler")
-        LightControler.resize(267, 229)
-        self.gridLayout = QtWidgets.QGridLayout(LightControler)
-        self.gridLayout.setContentsMargins(-1, 9, -1, -1)
-        self.gridLayout.setObjectName("gridLayout")
-        self.Lounge = QtWidgets.QLabel(LightControler)
-        self.Lounge.setObjectName("Lounge")
-        self.gridLayout.addWidget(self.Lounge, 0, 0, 1, 1)
-        self.Lounge_Br_lable = QtWidgets.QLabel(LightControler)
-        self.Lounge_Br_lable.setObjectName("Lounge_Br_lable")
-        self.gridLayout.addWidget(self.Lounge_Br_lable, 0, 1, 1, 1)
-        self.Powe_button = QtWidgets.QPushButton(LightControler)
-        self.Powe_button.setObjectName("Powe_button")
-        self.gridLayout.addWidget(self.Powe_button, 1, 0, 1, 1)
-        self.Lounge_br_sl = QtWidgets.QSlider(LightControler)
-        self.Lounge_br_sl.setEnabled(True)
-        self.Lounge_br_sl.setMaximum(100)
-        self.Lounge_br_sl.setTracking(True)
-        self.Lounge_br_sl.setOrientation(QtCore.Qt.Horizontal)
-        self.Lounge_br_sl.setInvertedControls(False)
-        self.Lounge_br_sl.setTickPosition(QtWidgets.QSlider.TicksBothSides)
-        self.Lounge_br_sl.setObjectName("Lounge_br_sl")
-        self.gridLayout.addWidget(self.Lounge_br_sl, 1, 1, 1, 1)
-        self.Lounge_tmp_lable = QtWidgets.QLabel(LightControler)
-        self.Lounge_tmp_lable.setObjectName("Lounge_tmp_lable")
-        self.gridLayout.addWidget(self.Lounge_tmp_lable, 2, 1, 1, 1)
-        self.Lounge_col_tmp_sl = QtWidgets.QSlider(LightControler)
-        self.Lounge_col_tmp_sl.setEnabled(True)
-        self.Lounge_col_tmp_sl.setMaximum(100)
-        self.Lounge_col_tmp_sl.setTracking(True)
-        self.Lounge_col_tmp_sl.setOrientation(QtCore.Qt.Horizontal)
-        self.Lounge_col_tmp_sl.setInvertedControls(False)
-        self.Lounge_col_tmp_sl.setTickPosition(QtWidgets.QSlider.TicksBothSides)
-        self.Lounge_col_tmp_sl.setObjectName("Lounge_col_tmp_sl")
-        self.gridLayout.addWidget(self.Lounge_col_tmp_sl, 3, 1, 1, 1)
-        self.line = QtWidgets.QFrame(LightControler)
-        self.line.setFrameShape(QtWidgets.QFrame.HLine)
-        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line.setObjectName("line")
-        self.gridLayout.addWidget(self.line, 4, 0, 1, 2)
-        self.Leo_room = QtWidgets.QLabel(LightControler)
-        self.Leo_room.setObjectName("Leo_room")
-        self.gridLayout.addWidget(self.Leo_room, 5, 0, 1, 1)
-        self.Leo_Br_lable = QtWidgets.QLabel(LightControler)
-        self.Leo_Br_lable.setObjectName("Leo_Br_lable")
-        self.gridLayout.addWidget(self.Leo_Br_lable, 5, 1, 1, 1)
-        self.Power_button = QtWidgets.QPushButton(LightControler)
-        self.Power_button.setObjectName("Power_button")
-        self.gridLayout.addWidget(self.Power_button, 6, 0, 1, 1)
-        self.Leos_br_sl = QtWidgets.QSlider(LightControler)
-        self.Leos_br_sl.setEnabled(True)
-        self.Leos_br_sl.setMaximum(100)
-        self.Leos_br_sl.setTracking(True)
-        self.Leos_br_sl.setOrientation(QtCore.Qt.Horizontal)
-        self.Leos_br_sl.setInvertedControls(False)
-        self.Leos_br_sl.setTickPosition(QtWidgets.QSlider.TicksBothSides)
-        self.Leos_br_sl.setObjectName("Leos_br_sl")
-        self.gridLayout.addWidget(self.Leos_br_sl, 6, 1, 1, 1)
-        self.Leo_col_tmp_lable = QtWidgets.QLabel(LightControler)
-        self.Leo_col_tmp_lable.setObjectName("Leo_col_tmp_lable")
-        self.gridLayout.addWidget(self.Leo_col_tmp_lable, 7, 1, 1, 1)
-        self.Leos_col_tem_sl = QtWidgets.QSlider(LightControler)
-        self.Leos_col_tem_sl.setEnabled(True)
-        self.Leos_col_tem_sl.setMaximum(100)
-        self.Leos_col_tem_sl.setTracking(True)
-        self.Leos_col_tem_sl.setOrientation(QtCore.Qt.Horizontal)
-        self.Leos_col_tem_sl.setInvertedControls(False)
-        self.Leos_col_tem_sl.setTickPosition(QtWidgets.QSlider.TicksBothSides)
-        self.Leos_col_tem_sl.setObjectName("Leos_col_tem_sl")
-        self.gridLayout.addWidget(self.Leos_col_tem_sl, 8, 1, 1, 1)
+        self.retranslateUi(Lights)
+        self.statusbar.messageChanged['QString'].connect(self.statusbar.showMessage)
+        self.Br_Slide.valueChanged.connect(self.br_Slide)
+        self.Col_Slide.valueChanged['int'].connect(self.col_slide)
+        self.pushButton.clicked.connect(partial(self.clicked_btn))
+        
+        #self.pushButton.clicked['bool'].connect(Lights.setAnimated)
+        #QtCore.QMetaObject.connectSlotsByName(Lights)
 
-        self.retranslateUi(LightControler)
-        self.Lounge_br_sl.valueChanged['int'].connect(self.Lounge_br_sl.setValue)
-        self.Powe_button.pressed.connect(self.Powe_button.toggle)
-        self.Power_button.toggled['bool'].connect(self.Power_button.toggle)
-        self.Lounge_col_tmp_sl.sliderMoved['int'].connect(self.Lounge_col_tmp_sl.setValue)
-        self.Leos_br_sl.valueChanged['int'].connect(self.Leos_br_sl.setValue)
-        self.Leos_col_tem_sl.valueChanged['int'].connect(self.Leos_col_tem_sl.setValue)
-        QtCore.QMetaObject.connectSlotsByName(LightControler)
-        LightControler.setTabOrder(self.Lounge_br_sl, self.Lounge_col_tmp_sl)
-        LightControler.setTabOrder(self.Lounge_col_tmp_sl, self.Power_button)
-        LightControler.setTabOrder(self.Power_button, self.Leos_br_sl)
-        LightControler.setTabOrder(self.Leos_br_sl, self.Leos_col_tem_sl)
-
-    def retranslateUi(self, LightControler):
+    def retranslateUi(self, Lights):
         _translate = QtCore.QCoreApplication.translate
-        LightControler.setWindowTitle(_translate("LightControler", "Form"))
-        self.Lounge.setText(_translate("LightControler", "Lounge"))
-        self.Lounge_Br_lable.setText(_translate("LightControler", "Brightness"))
-        self.Powe_button.setText(_translate("LightControler", "Power"))
-        self.Lounge_tmp_lable.setText(_translate("LightControler", "Colour Temp"))
-        self.Leo_room.setText(_translate("LightControler", "Leo\'s Room"))
-        self.Leo_Br_lable.setText(_translate("LightControler", "Brightness"))
-        self.Power_button.setText(_translate("LightControler", "Power"))
-        self.Leo_col_tmp_lable.setText(_translate("LightControler", "Colour Temp"))
-    
-    def get_tuya_status_for_lights_online(self):
-        pass
-        #populate gui with appropriate data eg power toggle on, name of light
-    def b_press(self, LightControler):
-        pass
-    def button_press(self):
-        pass
-    def bri_scale_moved(self):
-        pass
-    def col_temp_scale_moved(self):
-        pass
+        Lights.setWindowTitle(_translate("Lights", "Light Controller"))
+        self.label.setText(_translate("Lights", "Lounge"))
+        self.label_2.setText(_translate("Lights", "Brightness"))
+        self.label_3.setText(_translate("Lights", "Color Temperature"))
+        self.pushButton.setText(_translate("Lights", "Power"))
+    def clicked_btn(self, value):
+        print(value)
+        
+#        self.pushButton.isChecked() #think it checks said button
+#        print('ok')
+#        self.pushButton.setChecked(False) # changes btn state 
+#        print('done')
+    def br_Slide(self):
+        my_br = str(self.Br_Slide.value())
+        print('Brightness' , my_br)
+    def col_slide(self):
+        my_colour = str(self.Col_Slide.value())
+        print('Colour' , my_colour)
+        
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    LightControler = QtWidgets.QWidget()
-    ui = Ui_LightControler()
-    ui.setupUi(LightControler)
-    LightControler.show()
+    Lights = QtWidgets.QMainWindow()
+    ui = Ui_Lights()
+    ui.setupUi(Lights)
+    Lights.show()
     sys.exit(app.exec_())
