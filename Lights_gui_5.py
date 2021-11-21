@@ -1,9 +1,52 @@
 #!/usr/bin/python3.8
-
+import time
 from PyQt5 import QtCore, QtWidgets
 from functools import partial
-#from PyQt5.QtCore import Qt
+import tinytuya
+import json
+from threading import Thread
 
+with open('snapshot.json') as json_file:
+    jdata = json.load(json_file)
+
+counter = 0
+def lights(name, *num):
+#    1 = on/ off toggle
+#    2 = just off
+#    3 = Full Brightness
+#    4 = Brightness according to counter
+    global counter
+    for item in jdata["devices"]:
+        if item["name"] == name:
+            break
+    d = tinytuya.BulbDevice(item["id"], item["ip"], item["key"])
+    d.set_version(float(item["ver"]))
+    d.set_socketPersistent(True)
+    data = d.status()
+    for n in num:
+        if n == 2:
+            d.turn_off()
+        if n == 1:
+            if(data['dps']['20'] == True):
+                #print("its on Turning off")
+                d.turn_off()
+            elif(data['dps']['20'] == False):
+                #print("its off Turing on")
+                d.turn_on()
+        if n == 3:
+            d.set_brightness_percentage(brightness=100)
+            d.set_colourtemp_percentage(100)
+        if n == 4:
+            #print(counter)
+            d.set_brightness_percentage(counter)
+            d.set_colourtemp_percentage(counter)
+            time.sleep(1)
+            #print(counter)
+            if counter == 100:
+                counter = 0
+
+
+####Gui stuff
 class Ui_Lights(object):
     def setupUi(self, Lights):
         Lights.setObjectName("Lights")
@@ -73,18 +116,30 @@ class Ui_Lights(object):
         self.label_3.setText(_translate("Lights", "Color Temperature"))
         self.pushButton.setText(_translate("Lights", "Power"))
     def clicked_btn(self, value):
-        print(value)
+        Thread(target = lights, args=('Light_1', 1)).start()
+        Thread(target = lights, args=('Light_2', 1)).start() #Living Room
+        Thread(target = lights, args=('Light_3', 1)).start()
         
+###testing###
+#        print(value)
 #        self.pushButton.isChecked() #think it checks said button
 #        print('ok')
 #        self.pushButton.setChecked(False) # changes btn state 
 #        print('done')
+
     def br_Slide(self):
-        my_br = str(self.Br_Slide.value())
-        print('Brightness' , my_br)
+        global counter 
+        counter = int(self.Br_Slide.value())
+        lights('Light_3',4)
+        
+#        testing
+#        my_br = str(self.Br_Slide.value())
+#        print('Brightness' , my_br)
     def col_slide(self):
-        my_colour = str(self.Col_Slide.value())
-        print('Colour' , my_colour)
+        pass
+#        testing
+#        my_colour = str(self.Col_Slide.value())
+#        print('Colour' , my_colour)
         
 
 
