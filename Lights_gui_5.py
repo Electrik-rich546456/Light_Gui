@@ -1,5 +1,5 @@
 #!/usr/bin/python3.8
-import time
+#import time
 from PyQt5 import QtCore, QtWidgets
 from functools import partial
 import tinytuya
@@ -9,13 +9,16 @@ from threading import Thread
 with open('snapshot.json') as json_file:
     jdata = json.load(json_file)
 
-counter = 0
+br_counter = 0
+col_counter = 0
 def lights(name, *num):
 #    1 = on/ off toggle
 #    2 = just off
 #    3 = Full Brightness
-#    4 = Brightness according to counter
-    global counter
+#    4 = Brightness and temp according to counter
+#    5 = Brightness only according to counter
+#    6 = Colour Tempature only according to counter
+    global br_counter, col_counter
     for item in jdata["devices"]:
         if item["name"] == name:
             break
@@ -38,14 +41,30 @@ def lights(name, *num):
             d.set_colourtemp_percentage(100)
         if n == 4:
             #print(counter)
-            d.set_brightness_percentage(counter)
-            d.set_colourtemp_percentage(counter)
-            time.sleep(1)
-            #print(counter)
-            if counter == 100:
-                counter = 0
+            d.set_brightness_percentage(br_counter)
+            d.set_colourtemp_percentage(br_counter)
+        if n == 5:
+            d.set_brightness_percentage(br_counter)            
+        if n == 6:
+            d.set_colourtemp_percentage(col_counter) 
 
+################status get from tuya######
+def l_status(name):
+    for item in jdata["devices"]:
+        if item["name"] == name:
+            break
+    d = tinytuya.OutletDevice(item["id"], item["ip"], item["key"])
+    d.set_version(float(item["ver"]))
+    status = d.status()
+    #print('Status',  status)
+    br_counter = (status['dps']['22'])
+    print(br_counter)
+#    print('Bright', br_counter)
+#    col_counter = (status['dps']['23'])
+#    print('Color Temp',  col_counter)
+l_status('Light_3')
 
+#######
 ####Gui stuff
 class Ui_Lights(object):
     def setupUi(self, Lights):
@@ -59,7 +78,8 @@ class Ui_Lights(object):
         self.label.setObjectName("label")
         self.Br_Slide = QtWidgets.QSlider(self.hidden)
         self.Br_Slide.setGeometry(QtCore.QRect(120, 30, 170, 16))
-        self.Br_Slide.setMaximum(100)
+        self.Br_Slide.setValue(br_counter)
+        self.Br_Slide.setMaximum(1000)
         self.Br_Slide.setOrientation(QtCore.Qt.Horizontal)
         self.Br_Slide.setObjectName("Br_Slide")
         self.hoz_line = QtWidgets.QFrame(self.hidden)
@@ -128,20 +148,23 @@ class Ui_Lights(object):
 #        print('done')
 
     def br_Slide(self):
-        global counter 
-        counter = int(self.Br_Slide.value())
-        lights('Light_3',4)
+        global br_counter
+        br_counter = int(self.Br_Slide.value())
+#        print(br_counter) 
+        lights('Light_3',5)
         
 #        testing
 #        my_br = str(self.Br_Slide.value())
 #        print('Brightness' , my_br)
     def col_slide(self):
-        pass
+        global col_counter
+        col_counter = int(self.Col_Slide.value())
+        lights('Light_3',6)
+
 #        testing
 #        my_colour = str(self.Col_Slide.value())
 #        print('Colour' , my_colour)
         
-
 
 if __name__ == "__main__":
     import sys
