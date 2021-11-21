@@ -10,6 +10,7 @@ with open('snapshot.json') as json_file:
     jdata = json.load(json_file)
 
 br_counter = 0
+br2 = 0
 col_counter = 0
 def lights(name, *num):
 #    1 = on/ off toggle
@@ -56,9 +57,11 @@ def l_status(name):
     d = tinytuya.OutletDevice(item["id"], item["ip"], item["key"])
     d.set_version(float(item["ver"]))
     status = d.status()
+    global br_counter,  br2
     #print('Status',  status)
     br_counter = (status['dps']['22'])
     print(br_counter)
+    return br2
 #    print('Bright', br_counter)
 #    col_counter = (status['dps']['23'])
 #    print('Color Temp',  col_counter)
@@ -68,6 +71,7 @@ l_status('Light_3')
 ####Gui stuff
 class Ui_Lights(object):
     def setupUi(self, Lights):
+        print(br_counter)
         Lights.setObjectName("Lights")
         Lights.setEnabled(True)
         Lights.resize(315, 133)
@@ -79,7 +83,7 @@ class Ui_Lights(object):
         self.Br_Slide = QtWidgets.QSlider(self.hidden)
         self.Br_Slide.setGeometry(QtCore.QRect(120, 30, 170, 16))
         self.Br_Slide.setValue(br_counter)
-        self.Br_Slide.setMaximum(1000)
+        self.Br_Slide.setMaximum(10000)
         self.Br_Slide.setOrientation(QtCore.Qt.Horizontal)
         self.Br_Slide.setObjectName("Br_Slide")
         self.hoz_line = QtWidgets.QFrame(self.hidden)
