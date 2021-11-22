@@ -61,17 +61,19 @@ def l_status(name):
     #print('Status',  status)
     br_counter = (status['dps']['22'])
     print(br_counter)
-    return br2
+    return br_counter
 #    print('Bright', br_counter)
 #    col_counter = (status['dps']['23'])
 #    print('Color Temp',  col_counter)
 l_status('Light_3')
+type(br_counter)
 
 #######
 ####Gui stuff
 class Ui_Lights(object):
     def setupUi(self, Lights):
         print(br_counter)
+        
         Lights.setObjectName("Lights")
         Lights.setEnabled(True)
         Lights.resize(315, 133)
@@ -83,7 +85,8 @@ class Ui_Lights(object):
         self.Br_Slide = QtWidgets.QSlider(self.hidden)
         self.Br_Slide.setGeometry(QtCore.QRect(120, 30, 170, 16))
         self.Br_Slide.setValue(br_counter)
-        self.Br_Slide.setMaximum(10000)
+        self.Br_Slide.setMinimum(0)
+        self.Br_Slide.setMaximum(100)
         self.Br_Slide.setOrientation(QtCore.Qt.Horizontal)
         self.Br_Slide.setObjectName("Br_Slide")
         self.hoz_line = QtWidgets.QFrame(self.hidden)
@@ -98,6 +101,7 @@ class Ui_Lights(object):
         self.Vert_line_2.setObjectName("Vert_line_2")
         self.Col_Slide = QtWidgets.QSlider(self.hidden)
         self.Col_Slide.setGeometry(QtCore.QRect(120, 90, 170, 16))
+        self.Col_Slide.setMinimum(0)
         self.Col_Slide.setMaximum(100)
         self.Col_Slide.setOrientation(QtCore.Qt.Horizontal)
         self.Col_Slide.setObjectName("Col_Slide")
