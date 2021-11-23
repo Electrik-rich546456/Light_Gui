@@ -183,7 +183,7 @@ class Ui_Lights(object):
         br_counter = int(self.Br_Slide.value())
         Thread(target = lights, args=('Light_1', 5)).start()
         Thread(target = lights, args=('Light_2', 5)).start() #Living Room
-        Thread(target = lights, args=('Light_3', 5)).star
+        Thread(target = lights, args=('Light_3', 5)).start()
         
 #        testing to see Br_Slide value in terminal
 #        my_br = str(self.Br_Slide.value())
