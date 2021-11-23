@@ -50,31 +50,33 @@ def lights(name, *num):
             d.set_colourtemp_percentage(col_counter) 
 
 ################status get from tuya######
-def l_status(name):
+def l_status(name,  *sta):
     for item in jdata["devices"]:
         if item["name"] == name:
             break
     d = tinytuya.OutletDevice(item["id"], item["ip"], item["key"])
     d.set_version(float(item["ver"]))
     status = d.status()
-    global br_counter,  br2
+    global br_counter, col_counter
     #print('Status',  status)
-    br_counter = (int(status['dps']['22']) // 10)
-    print(int(br_counter))
-    
-    return br_counter
-#    print('Bright', br_counter)
-#    col_counter = (status['dps']['23'])
-#    print('Color Temp',  col_counter)
-l_status('Light_3')
-print(type(br_counter))
+    for n in sta:
+        if n == 1:
+            br_counter = (int(status['dps']['22']) // 10)
+            print('Brightness', (br_counter))
+            return br_counter
+        if n == 2:
+            col_counter = (int(status['dps']['23']) //10)
+            print('Color Temp',  col_counter)
+            return col_counter
+
+#print(type(br_counter))
 
 #######
 ####Gui stuff
 class Ui_Lights(object):
     def setupUi(self, Lights):
-        global br_counter
-        print('class says', br_counter)
+        global br_counter,  col_counter
+#        print('class says', br_counter)
 #        l_status('Light_3')
 
         Lights.setObjectName("Lights")
@@ -91,7 +93,7 @@ class Ui_Lights(object):
         self.Br_Slide.setMinimum(0)
         self.Br_Slide.setMaximum(100)
         
-        self.Br_Slide.setValue(br_counter)
+        self.Br_Slide.setValue(l_status('Light_3', 1))
 
         self.Br_Slide.setOrientation(QtCore.Qt.Horizontal)
         self.Br_Slide.setObjectName("Br_Slide")
@@ -109,6 +111,7 @@ class Ui_Lights(object):
         self.Col_Slide.setGeometry(QtCore.QRect(120, 90, 170, 16))
         self.Col_Slide.setMinimum(0)
         self.Col_Slide.setMaximum(100)
+        self.Col_Slide.setValue(l_status('Light_3', 2))
         self.Col_Slide.setOrientation(QtCore.Qt.Horizontal)
         self.Col_Slide.setObjectName("Col_Slide")
         self.label_2 = QtWidgets.QLabel(self.hidden)
@@ -164,8 +167,11 @@ class Ui_Lights(object):
     def br_Slide(self):
         global br_counter
         br_counter = int(self.Br_Slide.value())
-#        print(br_counter) 
-        lights('Light_3',5)
+        Thread(target = lights, args=('Light_1', 5)).start()
+        Thread(target = lights, args=('Light_2', 5)).start() #Living Room
+        Thread(target = lights, args=('Light_3', 5)).start()
+
+#        lights('Light_3',5)
         
 #        testing
 #        my_br = str(self.Br_Slide.value())
@@ -173,7 +179,11 @@ class Ui_Lights(object):
     def col_slide(self):
         global col_counter
         col_counter = int(self.Col_Slide.value())
-        lights('Light_3',6)
+        Thread(target = lights, args=('Light_1', 6)).start()
+        Thread(target = lights, args=('Light_2', 6)).start() #Living Room
+        Thread(target = lights, args=('Light_3', 6)).start()
+
+#        lights('Light_3',6)
 
 #        testing
 #        my_colour = str(self.Col_Slide.value())
