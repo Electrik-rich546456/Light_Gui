@@ -195,7 +195,7 @@ class Ui_Lights(object):
         Thread(target = lights, args=('Light_2', 6)).start() #Living Room
         Thread(target = lights, args=('Light_3', 6)).start()
 
-#        testing to see Col_Slide value in terminal
+#        testing to see Col_Slide value in terminal.
 #        my_colour = str(self.Col_Slide.value())
 #        print('Colour' , my_colour)
 if __name__ == "__main__":
