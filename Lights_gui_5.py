@@ -100,6 +100,10 @@ class Ui_Lights(object):
         Lights.setObjectName("Lights")
         Lights.setEnabled(True)
         Lights.resize(315, 133)
+#        self.setWindowIcon(QtCore.QIcon("icon.png"))
+#        setIcon(QMessageBox.Information)
+#        self.setWindowIcon(QtGui.QIcon('logo.png'))
+
         self.hidden = QtWidgets.QWidget(Lights)
         self.hidden.setObjectName("hidden")
         self.label = QtWidgets.QLabel(self.hidden)
@@ -112,6 +116,9 @@ class Ui_Lights(object):
         self.Br_Slide.setMaximum(100)
         
         self.Br_Slide.setValue(l_status('Light_3', 1))
+        self.Br_Slide.setTickPosition(QtWidgets.QSlider.TicksBelow)
+        self.Br_Slide.setTickInterval(10)
+        self.label = QtWidgets.QLabel("0")
 
         self.Br_Slide.setOrientation(QtCore.Qt.Horizontal)
         self.Br_Slide.setObjectName("Br_Slide")
@@ -181,9 +188,11 @@ class Ui_Lights(object):
     def br_Slide(self):
         global br_counter
         br_counter = int(self.Br_Slide.value())
+        self.label_2.setText(str(br_counter))
         Thread(target = lights, args=('Light_1', 5)).start()
         Thread(target = lights, args=('Light_2', 5)).start() #Living Room
         Thread(target = lights, args=('Light_3', 5)).start()
+        
         
 #        testing to see Br_Slide value in terminal
 #        my_br = str(self.Br_Slide.value())
