@@ -6,6 +6,11 @@ import tinytuya
 import json
 from threading import Thread
 
+#Using threads to turn 3 lights 
+#on at same time as they are all on one pendant
+
+
+
 with open('snapshot.json') as json_file:
     jdata = json.load(json_file)
 
@@ -52,6 +57,10 @@ def lights(name, *num):
 
 ################status get from tuya######
 def l_status(name,  *sta):
+# sta's ### statuses
+# 1 = Brightness 
+# 2 = Colour Temp
+# 3 = Power Status 
     for item in jdata["devices"]:
         if item["name"] == name:
             break
@@ -79,7 +88,7 @@ def l_status(name,  *sta):
                 pow = False
                 return pow
                 #print("its off")
-
+###############################
 #print(type(br_counter))
 l_status('Light_3', 3)
 
@@ -88,9 +97,6 @@ l_status('Light_3', 3)
 class Ui_Lights(object):
     def setupUi(self, Lights):
         global br_counter,  col_counter
-#        print('class says', br_counter)
-#        l_status('Light_3')
-
         Lights.setObjectName("Lights")
         Lights.setEnabled(True)
         Lights.resize(315, 133)
@@ -169,23 +175,17 @@ class Ui_Lights(object):
         Thread(target = lights, args=('Light_2', 1)).start() #Living Room
         Thread(target = lights, args=('Light_3', 1)).start()
         
-###testing###
+###testing to see btn click in terminal
 #        print(value)
-#        self.pushButton.isChecked() #think it checks said button
-#        print('ok')
-#        self.pushButton.setChecked(False) # changes btn state 
-#        print('done')
-
+    
     def br_Slide(self):
         global br_counter
         br_counter = int(self.Br_Slide.value())
         Thread(target = lights, args=('Light_1', 5)).start()
         Thread(target = lights, args=('Light_2', 5)).start() #Living Room
-        Thread(target = lights, args=('Light_3', 5)).start()
-
-#        lights('Light_3',5)
+        Thread(target = lights, args=('Light_3', 5)).star
         
-#        testing
+#        testing to see Br_Slide value in terminal
 #        my_br = str(self.Br_Slide.value())
 #        print('Brightness' , my_br)
     def col_slide(self):
@@ -195,13 +195,9 @@ class Ui_Lights(object):
         Thread(target = lights, args=('Light_2', 6)).start() #Living Room
         Thread(target = lights, args=('Light_3', 6)).start()
 
-#        lights('Light_3',6)
-
-#        testing
+#        testing to see Col_Slide value in terminal
 #        my_colour = str(self.Col_Slide.value())
 #        print('Colour' , my_colour)
-        
-
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
