@@ -59,21 +59,24 @@ def l_status(name):
     status = d.status()
     global br_counter,  br2
     #print('Status',  status)
-    br_counter = (status['dps']['22'])
-    print(br_counter)
+    br_counter = (int(status['dps']['22']) // 10)
+    print(int(br_counter))
+    
     return br_counter
 #    print('Bright', br_counter)
 #    col_counter = (status['dps']['23'])
 #    print('Color Temp',  col_counter)
 l_status('Light_3')
-type(br_counter)
+print(type(br_counter))
 
 #######
 ####Gui stuff
 class Ui_Lights(object):
     def setupUi(self, Lights):
-        print(br_counter)
-        
+        global br_counter
+        print('class says', br_counter)
+#        l_status('Light_3')
+
         Lights.setObjectName("Lights")
         Lights.setEnabled(True)
         Lights.resize(315, 133)
@@ -84,9 +87,12 @@ class Ui_Lights(object):
         self.label.setObjectName("label")
         self.Br_Slide = QtWidgets.QSlider(self.hidden)
         self.Br_Slide.setGeometry(QtCore.QRect(120, 30, 170, 16))
-        self.Br_Slide.setValue(br_counter)
+        
         self.Br_Slide.setMinimum(0)
         self.Br_Slide.setMaximum(100)
+        
+        self.Br_Slide.setValue(br_counter)
+
         self.Br_Slide.setOrientation(QtCore.Qt.Horizontal)
         self.Br_Slide.setObjectName("Br_Slide")
         self.hoz_line = QtWidgets.QFrame(self.hidden)
