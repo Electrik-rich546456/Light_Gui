@@ -12,6 +12,7 @@ with open('snapshot.json') as json_file:
 br_counter = 0
 br2 = 0
 col_counter = 0
+pow = True
 def lights(name, *num):
 #    1 = on/ off toggle
 #    2 = just off
@@ -54,22 +55,33 @@ def l_status(name,  *sta):
     for item in jdata["devices"]:
         if item["name"] == name:
             break
-    d = tinytuya.OutletDevice(item["id"], item["ip"], item["key"])
+    d = tinytuya.BulbDevice(item["id"], item["ip"], item["key"])
     d.set_version(float(item["ver"]))
     status = d.status()
-    global br_counter, col_counter
+    global br_counter, col_counter,  pow
     #print('Status',  status)
     for n in sta:
         if n == 1:
             br_counter = (int(status['dps']['22']) // 10)
-            print('Brightness', (br_counter))
+            #print('Brightness', (br_counter))
             return br_counter
         if n == 2:
             col_counter = (int(status['dps']['23']) //10)
-            print('Color Temp',  col_counter)
+            #print('Color Temp',  col_counter)
             return col_counter
+        if n ==3:
+            if(status['dps']['20'] == True):
+                pow = True
+                #print(pow)
+                return pow
+                #print("its on")                
+            elif(status['dps']['20'] == False):
+                pow = False
+                return pow
+                #print("its off")
 
 #print(type(br_counter))
+l_status('Light_3', 3)
 
 #######
 ####Gui stuff
@@ -125,7 +137,7 @@ class Ui_Lights(object):
         self.pushButton.setGeometry(QtCore.QRect(10, 40, 80, 23))
         self.pushButton.setCheckable(True)
 #     self.pushButton.setChecked(True)
-        self.pushButton.setChecked(False)
+        self.pushButton.setChecked(pow)
         
         self.pushButton.setAutoDefault(False)
         self.pushButton.setDefault(False)
