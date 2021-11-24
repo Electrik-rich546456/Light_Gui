@@ -90,7 +90,11 @@ def l_status(name,  *sta):
                 #print("its off")
 ###############################
 #print(type(br_counter))
+l_status('Light_3', 1)
+l_status('Light_3', 2)
 l_status('Light_3', 3)
+
+print(br_counter)
 
 #######
 ####Gui stuff
@@ -118,7 +122,7 @@ class Ui_Lights(object):
         self.Br_Slide.setValue(l_status('Light_3', 1))
         self.Br_Slide.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.Br_Slide.setTickInterval(10)
-        self.label = QtWidgets.QLabel("0")
+#        self.label_4.label = QtWidgets.QLabel("0")
 
         self.Br_Slide.setOrientation(QtCore.Qt.Horizontal)
         self.Br_Slide.setObjectName("Br_Slide")
@@ -142,9 +146,16 @@ class Ui_Lights(object):
         self.label_2 = QtWidgets.QLabel(self.hidden)
         self.label_2.setGeometry(QtCore.QRect(170, 10, 71, 16))
         self.label_2.setObjectName("label_2")
+        
         self.label_3 = QtWidgets.QLabel(self.hidden)
         self.label_3.setGeometry(QtCore.QRect(150, 60, 141, 20))
         self.label_3.setObjectName("label_3")
+        
+        self.label_4 = QtWidgets.QLabel(self.hidden)
+        self.label_4.setGeometry(QtCore.QRect(250, 10, 71, 16))
+        self.label_4.setObjectName("label_4")
+        self.label_4.setText(str(br_counter))
+        
         self.pushButton = QtWidgets.QPushButton(self.hidden)
         self.pushButton.setEnabled(True)
         self.pushButton.setGeometry(QtCore.QRect(10, 40, 80, 23))
@@ -176,6 +187,7 @@ class Ui_Lights(object):
         self.label.setText(_translate("Lights", "Lounge"))
         self.label_2.setText(_translate("Lights", "Brightness"))
         self.label_3.setText(_translate("Lights", "Color Temperature"))
+        self.label_4.setText(_translate("Lights",  str(br_counter)))
         self.pushButton.setText(_translate("Lights", "Power"))
     def clicked_btn(self, value):
         Thread(target = lights, args=('Light_1', 1)).start()
@@ -188,7 +200,7 @@ class Ui_Lights(object):
     def br_Slide(self):
         global br_counter
         br_counter = int(self.Br_Slide.value())
-        self.label_2.setText(str(br_counter))
+        self.label_4.setText(str(br_counter))
         Thread(target = lights, args=('Light_1', 5)).start()
         Thread(target = lights, args=('Light_2', 5)).start() #Living Room
         Thread(target = lights, args=('Light_3', 5)).start()
