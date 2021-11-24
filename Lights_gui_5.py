@@ -126,6 +126,7 @@ class Ui_Lights(object):
 
         self.Br_Slide.setOrientation(QtCore.Qt.Horizontal)
         self.Br_Slide.setObjectName("Br_Slide")
+        
         self.hoz_line = QtWidgets.QFrame(self.hidden)
         self.hoz_line.setGeometry(QtCore.QRect(0, 140, 591, 20))
         self.hoz_line.setFrameShape(QtWidgets.QFrame.HLine)
@@ -141,20 +142,27 @@ class Ui_Lights(object):
         self.Col_Slide.setMinimum(0)
         self.Col_Slide.setMaximum(100)
         self.Col_Slide.setValue(l_status('Light_3', 2))
+        self.Col_Slide.setTickPosition(QtWidgets.QSlider.TicksBelow)
+        self.Col_Slide.setTickInterval(10)
         self.Col_Slide.setOrientation(QtCore.Qt.Horizontal)
         self.Col_Slide.setObjectName("Col_Slide")
         self.label_2 = QtWidgets.QLabel(self.hidden)
-        self.label_2.setGeometry(QtCore.QRect(170, 10, 71, 16))
+        self.label_2.setGeometry(QtCore.QRect(120, 10, 71, 16))
         self.label_2.setObjectName("label_2")
         
         self.label_3 = QtWidgets.QLabel(self.hidden)
-        self.label_3.setGeometry(QtCore.QRect(150, 60, 141, 20))
+        self.label_3.setGeometry(QtCore.QRect(120, 60, 141, 20))
         self.label_3.setObjectName("label_3")
         
         self.label_4 = QtWidgets.QLabel(self.hidden)
-        self.label_4.setGeometry(QtCore.QRect(250, 10, 71, 16))
+        self.label_4.setGeometry(QtCore.QRect(265, 10, 71, 16))
         self.label_4.setObjectName("label_4")
         self.label_4.setText(str(br_counter))
+        
+        self.label_5 = QtWidgets.QLabel(self.hidden)
+        self.label_5.setGeometry(QtCore.QRect(265, 60, 71, 16))
+        self.label_5.setObjectName("label_5")
+        self.label_5.setText(str(col_counter))
         
         self.pushButton = QtWidgets.QPushButton(self.hidden)
         self.pushButton.setEnabled(True)
@@ -188,6 +196,8 @@ class Ui_Lights(object):
         self.label_2.setText(_translate("Lights", "Brightness"))
         self.label_3.setText(_translate("Lights", "Color Temperature"))
         self.label_4.setText(_translate("Lights",  str(br_counter)))
+        self.label_5.setText(_translate("Lights",  str(col_counter)))
+
         self.pushButton.setText(_translate("Lights", "Power"))
     def clicked_btn(self, value):
         Thread(target = lights, args=('Light_1', 1)).start()
@@ -212,6 +222,7 @@ class Ui_Lights(object):
     def col_slide(self):
         global col_counter
         col_counter = int(self.Col_Slide.value())
+        self.label_5.setText(str(col_counter))
         Thread(target = lights, args=('Light_1', 6)).start()
         Thread(target = lights, args=('Light_2', 6)).start() #Living Room
         Thread(target = lights, args=('Light_3', 6)).start()
