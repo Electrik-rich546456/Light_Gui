@@ -1,6 +1,9 @@
 #!/usr/bin/python3.8
 #import time
 from PyQt5 import QtCore, QtWidgets
+#from PyQt5.QtWidgets import *
+#from PyQt5.QtCore import *
+
 from functools import partial
 import tinytuya
 import json
@@ -103,7 +106,7 @@ class Ui_Lights(object):
         global br_counter,  col_counter
         Lights.setObjectName("Lights")
         Lights.setEnabled(True)
-        Lights.resize(315, 133)
+        Lights.resize(317, 133)  #(across, down)
 #        self.setWindowIcon(QtCore.QIcon("icon.png"))
 #        setIcon(QMessageBox.Information)
 #        self.setWindowIcon(QtGui.QIcon('logo.png'))
@@ -123,7 +126,6 @@ class Ui_Lights(object):
         self.Br_Slide.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.Br_Slide.setTickInterval(10)
         self.Br_Slide.setSingleStep(10)
-#        self.label_4.label = QtWidgets.QLabel("0")
 
         self.Br_Slide.setOrientation(QtCore.Qt.Horizontal)
         self.Br_Slide.setObjectName("Br_Slide")
@@ -189,7 +191,7 @@ class Ui_Lights(object):
         self.Br_Slide.valueChanged.connect(self.br_Slide)
         self.Col_Slide.valueChanged['int'].connect(self.col_slide)
         self.pushButton.clicked.connect(partial(self.clicked_btn))
-        self.checkBox.toggled.connect(self.ticked)
+        self.checkBox.toggled.connect(self.toggleLocked)
 
         
         #self.pushButton.clicked['bool'].connect(Lights.setAnimated)
@@ -233,11 +235,22 @@ class Ui_Lights(object):
         Thread(target = lights, args=('Light_1', 6)).start()
         Thread(target = lights, args=('Light_2', 6)).start() #Living Room
         Thread(target = lights, args=('Light_3', 6)).start()
-    def ticked(self,  value):
+    def toggleLocked(self,  value):
+#        Br_Slide, Col_Slide = QtCore.QObject.findChildren(QtCore.QObject, "Br_Slide")
+#        Br_Slide, Col_Slide = self.QObject.findChildren(QtWidgets.QSlider) 
+        self.Col_Slide.setValue(self.Br_Slide.value())
         if value:
-            print("ticked",  value)
+            self.Br_Slide.valueChanged[int].connect(self.Col_Slide.setValue)
+            self.Col_Slide.valueChanged[int].connect(self.Br_Slide.setValue)
         else:
-            print("ticked^%U&*B&*b",  value)
+            self.Br_Slide.valueChanged[int].disconnect()
+            self.Col_Slide.valueChanged[int].disconnect()
+            self.Br_Slide.valueChanged.connect(self.br_Slide)
+            self.Col_Slide.valueChanged['int'].connect(self.col_slide)
+#        if value:
+#            print("ticked",  value)
+#        else:
+#            print("ticked^%U&*B&*b",  value)
         
 
 #        testing to see Col_Slide value in terminal.
