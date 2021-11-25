@@ -170,7 +170,6 @@ class Ui_Lights(object):
         self.pushButton.setCheckable(True)
 #     self.pushButton.setChecked(True)
         self.pushButton.setChecked(pow)
-        
         self.pushButton.setAutoDefault(False)
         self.pushButton.setDefault(False)
         self.pushButton.setFlat(False)
@@ -179,12 +178,17 @@ class Ui_Lights(object):
         self.statusbar = QtWidgets.QStatusBar(Lights)
         self.statusbar.setObjectName("statusbar")
         Lights.setStatusBar(self.statusbar)
+        self.checkBox = QtWidgets.QCheckBox(self.hidden)
+        self.checkBox.setObjectName(u"checkBox")
+        self.checkBox.setGeometry(QtCore.QRect(10, 80, 51, 16))
 
         self.retranslateUi(Lights)
         self.statusbar.messageChanged['QString'].connect(self.statusbar.showMessage)
         self.Br_Slide.valueChanged.connect(self.br_Slide)
         self.Col_Slide.valueChanged['int'].connect(self.col_slide)
         self.pushButton.clicked.connect(partial(self.clicked_btn))
+        self.checkBox.toggled.connect(self.ticked)
+
         
         #self.pushButton.clicked['bool'].connect(Lights.setAnimated)
         #QtCore.QMetaObject.connectSlotsByName(Lights)
@@ -197,6 +201,7 @@ class Ui_Lights(object):
         self.label_3.setText(_translate("Lights", "Color Temperature"))
         self.label_4.setText(_translate("Lights",  str(br_counter)))
         self.label_5.setText(_translate("Lights",  str(col_counter)))
+        self.checkBox.setText(_translate("Lights", u"Lock", None))
 
         self.pushButton.setText(_translate("Lights", "Power"))
     def clicked_btn(self, value):
@@ -226,6 +231,9 @@ class Ui_Lights(object):
         Thread(target = lights, args=('Light_1', 6)).start()
         Thread(target = lights, args=('Light_2', 6)).start() #Living Room
         Thread(target = lights, args=('Light_3', 6)).start()
+    def ticked(self):
+        print("ticked")
+        
 
 #        testing to see Col_Slide value in terminal.
 #        my_colour = str(self.Col_Slide.value())
