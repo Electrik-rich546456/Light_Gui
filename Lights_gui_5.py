@@ -94,7 +94,7 @@ l_status('Light_3', 1)
 l_status('Light_3', 2)
 l_status('Light_3', 3)
 
-print(br_counter)
+#print(br_counter)
 
 #######
 ####Gui stuff
@@ -122,6 +122,7 @@ class Ui_Lights(object):
         self.Br_Slide.setValue(l_status('Light_3', 1))
         self.Br_Slide.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.Br_Slide.setTickInterval(10)
+        self.Br_Slide.setSingleStep(10)
 #        self.label_4.label = QtWidgets.QLabel("0")
 
         self.Br_Slide.setOrientation(QtCore.Qt.Horizontal)
@@ -144,6 +145,7 @@ class Ui_Lights(object):
         self.Col_Slide.setValue(l_status('Light_3', 2))
         self.Col_Slide.setTickPosition(QtWidgets.QSlider.TicksBelow)
         self.Col_Slide.setTickInterval(10)
+        self.Col_Slide.setSingleStep(10)
         self.Col_Slide.setOrientation(QtCore.Qt.Horizontal)
         self.Col_Slide.setObjectName("Col_Slide")
         self.label_2 = QtWidgets.QLabel(self.hidden)
@@ -231,8 +233,11 @@ class Ui_Lights(object):
         Thread(target = lights, args=('Light_1', 6)).start()
         Thread(target = lights, args=('Light_2', 6)).start() #Living Room
         Thread(target = lights, args=('Light_3', 6)).start()
-    def ticked(self):
-        print("ticked")
+    def ticked(self,  value):
+        if value:
+            print("ticked",  value)
+        else:
+            print("ticked^%U&*B&*b",  value)
         
 
 #        testing to see Col_Slide value in terminal.
