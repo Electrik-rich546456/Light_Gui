@@ -219,6 +219,19 @@
      <string>TextLabel</string>
     </property>
    </widget>
+   <widget class="QToolButton" name="toolButton">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>9</y>
+      <width>20</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>...</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
@@ -297,6 +310,22 @@
     <hint type="sourcelabel">
      <x>195</x>
      <y>62</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>85</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>Lights</receiver>
+   <slot>raise()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>13</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
