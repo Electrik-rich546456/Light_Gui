@@ -14,7 +14,7 @@ from threading import Thread
 
 
 
-with open('snapshot.json') as json_file:
+with open('/home/user/Documents/Python works/Lights/Light_Gui/snapshot.json') as json_file:
     jdata = json.load(json_file)
 
 br_counter = 0
